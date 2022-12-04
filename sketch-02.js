@@ -21,14 +21,14 @@ const sketch = () => {
 
     context.fillStyle = 'black';
 
-    const cx = width * 0.5;
-    const cy = height * 0.5;
-    const w = width * 0.01;
-    const h = height * 0.1;
+    const cx = width;
+    const cy = height;
+    const w = width * random.range(0.01, 0.05);
+    const h = height * random.range(0.1, 0.2);
     let x, y;
 
-    const num = 12;
-    const radius = width * 0.3;
+    const num = 80;
+    const radius = width * 0.75;
 
     for (let i = 0; i < num; i++) {
       const slice = math.degToRad(360) / num;
@@ -40,11 +40,23 @@ const sketch = () => {
       context.save();
       context.translate(x, y);
       context.rotate(-angle);
-      context.scale(random.range(1, 3) ,1);
+      context.scale(random.range(0.1, 2), random.range(0.2, 0.5));
   
       context.beginPath();
-      context.rect( -w * 0.5, -h * 0.5, w, h);
+      context.rect( -w * random.range(0.3, 0.8), random.range(0, -h * 0.5), w, h);
       context.fill();
+      context.restore();
+
+      context.save();
+      context.translate(cx, cy);
+      context.rotate(-angle);
+
+      context.lineWidth = random.range(1, 32);
+
+      context.beginPath();
+      context.arc(0, 0, radius * random.range(0.7, 1.3) , slice * random.range(1, -8), slice * random.range(1, 5));
+      context.stroke();
+
       context.restore();
       
     }
